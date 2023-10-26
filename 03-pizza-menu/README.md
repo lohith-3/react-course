@@ -56,3 +56,17 @@ Props are immutable, they can't be changed they are read-only
 # Conditional Rendering
 
 So, it is basically rendering some piece of UI, no matter if that's a piece of JSX, or if it's an entire component, based on a certain condition.
+
+# React Fragments
+
+A Piece of JSX, no matter where it is defined can only have in fact one root element.
+
+A React Fragment basically lets us group some elements without leaving any trace in the HTML tree, so in the DOM.
+
+# Section Summary
+
+Components are the building blocks of any user interface in React.
+
+Now each component is a self-contained piece of the user interface, which includes its own data, its own javascript logic, and its own appearance.
+
+Now in practical terms, we write this appearance using a declarative syntax called JSX and its this block of JSX that ultimately get returned from each component and this JSX is what's going to describe exactly what the user will see on the screen when they use the application.
