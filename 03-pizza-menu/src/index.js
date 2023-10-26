@@ -70,27 +70,33 @@ const Menu = () => {
   return (
     <main className="menu">
       <h2>Our Menu</h2>
-      <Pizza
-        name="Pizza Prosciutto"
-        ingredients="Tomato, mozarella, ham, aragula, and burrata cheese"
-        photoName="pizzas/prosciutto.jpg"
-        price={10}
-      />
+      {pizzaData.length > 0 ? (
+        <ul className="pizzas">
+          {pizzaData.map((pizza, idx) => (
+            <Pizza pizza={pizza} key={`${idx}-${pizza.name}`} />
+          ))}
+        </ul>
+      ) : (
+        <p>We're Still working on our menu. Please come back later :-)</p>
+      )}
     </main>
   );
 };
 
 const Pizza = (props) => {
-  const { name, ingredients, photoName, price } = props;
+  const { name, ingredients, photoName, price, soldOut } = props.pizza;
+
+  // if (soldOut) return null;
+
   return (
-    <div className="pizza">
+    <li className="pizza">
       <img src={photoName} alt="Pizza Prosciutto" />
       <div>
         <h3>{name}</h3>
         <p>{ingredients}</p>
         <span>{price + 3}</span>
       </div>
-    </div>
+    </li>
   );
 };
 
@@ -99,11 +105,25 @@ const Footer = () => {
   const openHour = 12;
   const closeHour = 22;
   const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
 
   // return React.createElement("footer", null, "We're currently open!");
+  // {new Date().toLocaleTimeString()} We're currently Open!
+
+  // if(!isOpen) return <p>CLOSED</p>
+
   return (
     <footer className="footer">
-      {new Date().toLocaleTimeString()} We're currently Open!
+      {isOpen ? (
+        <div className="order">
+          <p>We're Open Until {closeHour}:00. Come visit us or order online.</p>
+          <button className="btn">Order</button>
+        </div>
+      ) : (
+        <p>
+          We're happy to welcome you betweeen {openHour}:00 and {closeHour}:00
+        </p>
+      )}
     </footer>
   );
 };
