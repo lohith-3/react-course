@@ -43,12 +43,16 @@ parameters.
 
 # State
 
-## State is basically internal component data that can be updated by the component's logic. So by the component itself
+State is basically internal component data that can be updated by the component's logic. So by the component itself
 
 # Props
 
-## Props on the other hand is data that is coming from the parent component. SO from the outside basically. So it is the parent component who owns the data and so therefore it cannot be modified by the child component.
+Props on the other hand is data that is coming from the parent component. SO from the outside basically. So it is the parent component who owns the data and so therefore it cannot be modified by the child component.
 
-## Instead props can only be updated the parent component itself.
+Instead props can only be updated the parent component itself.
 
-## Props are immutable, they can't be changed they are read-only
+Props are immutable, they can't be changed they are read-only
+
+# Conditional Rendering
+
+So, it is basically rendering some piece of UI, no matter if that's a piece of JSX, or if it's an entire component, based on a certain condition.
