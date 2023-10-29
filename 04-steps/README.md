@@ -18,3 +18,11 @@ When one single component is rendered, we call that a view. and so all the views
 
 We change the state, we change the UI.
 Persist local variabled between renders and re-renders.
+
+# REACT IS ALL ABOUT IMMUTABILITY
+
+## Updating State Based on Current State
+
+When you're updating the state based on the current state value, its a good practice to use a call back function to get the current value and update the state.
+
+If you're not using the current state value to update value, then you can directly do this setState({name: 'Fred'})
