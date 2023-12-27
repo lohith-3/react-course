@@ -29,11 +29,35 @@ const App = () => {
     setItems((items) => [...items, item]);
   };
 
+  const handleDeleteItem = (id) => {
+    setItems((items) => items.filter((item) => item.id !== id));
+  };
+
+  const handleUpdateItem = (e, id) => {
+    // const updatedItems = items.map((item) => {
+    //   if (item.id === id) {
+    //     return { ...item, packed: e.target.checked };
+    //   } else {
+    //     return { ...item };
+    //   }
+    // });
+    // setItems(updatedItems);
+    setItems((items) =>
+      items.map((item) =>
+        item.id === id ? { ...item, packed: e.target.checked } : { ...item }
+      )
+    );
+  };
+
   return (
     <div className="app">
       <Logo />
       <Form onAddItems={handleAddItems} />
-      <PackagingList items={items} />
+      <PackagingList
+        items={items}
+        onDeleteItem={handleDeleteItem}
+        onUpdateItem={handleUpdateItem}
+      />
       <Stats />
     </div>
   );
@@ -94,24 +118,36 @@ const Form = ({ onAddItems }) => {
   );
 };
 
-const PackagingList = ({ items }) => {
+const PackagingList = ({ items, onDeleteItem, onUpdateItem }) => {
   return (
     <div className="list">
       <ul>
         {items.length > 0 &&
-          items.map((item) => <Item item={item} key={item.id} />)}
+          items.map((item) => (
+            <Item
+              item={item}
+              key={item.id}
+              onDeleteItem={onDeleteItem}
+              onUpdateItem={onUpdateItem}
+            />
+          ))}
       </ul>
     </div>
   );
 };
 
-const Item = ({ item }) => {
+const Item = ({ item, onDeleteItem, onUpdateItem }) => {
   return (
     <li>
+      <input
+        type="checkbox"
+        value={item.packed}
+        onChange={(e) => onUpdateItem(e, item.id)}
+      />
       <span style={item.packed ? { textDecoration: "line-through" } : {}}>
         {item.quantity} {item.description}
       </span>
-      <span>❌</span>
+      <button onClick={() => onDeleteItem(item.id)}>❌</button>
     </li>
   );
 };
