@@ -27,3 +27,19 @@ when the child component receives new updated props, that will actually also cau
 So in conclusion, whenever a piece of state is passed as a prop, when that state updates both components are re-rendered.
 
 props, are data sent by parent component to configure the child component.
+
+# What is "Thinking in React" ?
+
+Well, while you are building an application, thinking in react means that you have a very good mental model of how and when to use all the react tools like component, state, props, general data flow, effects and many more.
+
+It's also about always thinking in terms of state transitions rather than in element mutations as we have learned before.
+
+## The "THINKING IN REACT" Process :
+
+Refer pdf slide
+
+# Lifting State Up
+
+So, basically what that means is that whenever multiple sibling components need access to the same state, we move that piece of state up to the first common parent component.
+
+Refer pdf

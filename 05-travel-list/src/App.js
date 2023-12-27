@@ -1,33 +1,39 @@
 import { useState } from "react";
 
-const initialItems = [
-  {
-    id: 1,
-    description: "Passports",
-    quantity: 2,
-    packed: false,
-  },
-  {
-    id: 2,
-    description: "Snacks",
-    quantity: 12,
-    packed: false,
-  },
-  {
-    id: 3,
-    description: "Charger",
-    quantity: 3,
-    packed: true,
-  },
-];
+// const initialItems = [
+//   {
+//     id: 1,
+//     description: "Passports",
+//     quantity: 2,
+//     packed: false,
+//   },
+//   {
+//     id: 2,
+//     description: "Snacks",
+//     quantity: 12,
+//     packed: false,
+//   },
+//   {
+//     id: 3,
+//     description: "Charger",
+//     quantity: 3,
+//     packed: true,
+//   },
+// ];
 
 const App = () => {
   // const [items, setItems] = useState(initialItems);
+  const [items, setItems] = useState([]);
+
+  const handleAddItems = (item) => {
+    setItems((items) => [...items, item]);
+  };
+
   return (
     <div className="app">
       <Logo />
-      <Form />
-      <PackagingList />
+      <Form onAddItems={handleAddItems} />
+      <PackagingList items={items} />
       <Stats />
     </div>
   );
@@ -41,7 +47,7 @@ const Logo = () => {
   );
 };
 
-const Form = () => {
+const Form = ({ onAddItems }) => {
   const [description, setDescription] = useState("");
   const [quantity, setQuantity] = useState(1);
 
@@ -53,11 +59,13 @@ const Form = () => {
     const newItem = { description, quantity, packed: false, id: Date.now() };
     console.log(newItem);
 
+    onAddItems(newItem);
+
     setDescription("");
     setQuantity(1);
   };
 
-  console.log(quantity);
+  // console.log(items);
 
   // onSubmit={(e)=> handleSubmit(e)}
   // Value is only - Read Only
@@ -86,13 +94,12 @@ const Form = () => {
   );
 };
 
-const PackagingList = () => {
+const PackagingList = ({ items }) => {
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item) => (
-          <Item item={item} key={item.id} />
-        ))}
+        {items.length > 0 &&
+          items.map((item) => <Item item={item} key={item.id} />)}
       </ul>
     </div>
   );
