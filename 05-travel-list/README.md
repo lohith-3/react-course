@@ -43,3 +43,7 @@ Refer pdf slide
 So, basically what that means is that whenever multiple sibling components need access to the same state, we move that piece of state up to the first common parent component.
 
 Refer pdf
+
+# Deriving State
+
+Refer pdf
