@@ -18,23 +18,23 @@ const App = () => {
   );
 };
 
-// const Counter = () => {
-//   const [count, setCount] = useState(0);
+const Counter = () => {
+  const [count, setCount] = useState(0);
 
-//   const handleIncrement = () => {
-//     setCount((c) => c + 1);
-//   };
-//   const handleDecrement = () => {
-//     setCount((c) => c - 1);
-//   };
-//   return (
-//     <div>
-//       <p>Count: {count}</p>
-//       <button onClick={handleIncrement}>Increment</button>
-//       <button onClick={handleDecrement}>Decrement</button>
-//     </div>
-//   );
-// };
+  const handleIncrement = () => {
+    setCount((c) => c + 1);
+  };
+  const handleDecrement = () => {
+    setCount((c) => c - 1);
+  };
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={handleIncrement}>Increment</button>
+      <button onClick={handleDecrement}>Decrement</button>
+    </div>
+  );
+};
 
 const Steps = () => {
   // Default Value
@@ -74,35 +74,16 @@ const Steps = () => {
           </p>
 
           <div className="buttons">
-            <Button
-              textColor={btnStyle.color}
-              bgColor={btnStyle.backgroundColor}
-              onClick={handlePrevious}
-            >
-              <span>👈</span>Previous
-            </Button>
-            <Button
-              textColor={btnStyle.color}
-              bgColor={btnStyle.backgroundColor}
-              onClick={handleNext}
-            >
-              Next<span>👉</span>
-            </Button>
+            <button style={btnStyle} onClick={handlePrevious}>
+              Previous
+            </button>
+            <button style={btnStyle} onClick={handleNext}>
+              Next
+            </button>
           </div>
         </div>
       )}
     </>
-  );
-};
-
-const Button = ({ textColor, bgColor, onClick, children }) => {
-  return (
-    <button
-      style={{ backgroundColor: bgColor, color: textColor }}
-      onClick={onClick}
-    >
-      {children}
-    </button>
   );
 };
 
