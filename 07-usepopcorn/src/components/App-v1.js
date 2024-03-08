@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import StarRating from "./components/StarRating";
 
 const KEY = "d0608cdc";
@@ -56,12 +56,6 @@ const average = (arr) =>
 // Start Of NavBar
 
 const Search = ({ query, setQuery }) => {
-  const inputEl = useRef(null);
-
-  useEffect(() => {
-    inputEl.current.focus();
-  }, []);
-
   return (
     <input
       className="search"
@@ -69,7 +63,6 @@ const Search = ({ query, setQuery }) => {
       placeholder="Search movies..."
       value={query}
       onChange={(e) => setQuery(e.target.value)}
-      ref={inputEl}
     />
   );
 };
@@ -268,16 +261,8 @@ const ErrorMessage = ({ message }) => {
 
 const MovieDetails = ({ selectedId, onHandleClose, onAddWatched, watched }) => {
   const [movie, setMovie] = useState({});
-  const [userRating, setUserRating] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-
-  const countRef = useRef(0);
-
-  // let count = 0; // ON EVERY RE_RENDERS IT intializes back to 0
-
-  useEffect(() => {
-    countRef.current += 1;
-  }, [userRating]);
+  const [userRating, setUserRating] = useState("");
 
   const {
     Title: title,
@@ -291,18 +276,6 @@ const MovieDetails = ({ selectedId, onHandleClose, onAddWatched, watched }) => {
     Director: director,
     Genre: genre,
   } = movie;
-
-  // console.log({ imdbRating });
-
-  // const [isTop, setIsTop] = useState(imdbRating > 8); // ONLY ON COMPONENT MOUNT
-  // useEffect(() => {
-  //   setIsTop(imdbRating > 8);
-  // }, [imdbRating]);
-  // console.log({ isTop });
-
-  // DERIVED STATE
-  const isTop = imdbRating > 8;
-  console.log({ isTop });
 
   useEffect(() => {
     setIsLoading(true);
@@ -333,7 +306,6 @@ const MovieDetails = ({ selectedId, onHandleClose, onAddWatched, watched }) => {
       userRating,
       imdbRating: Number(imdbRating),
       runTime: Number(runTime.split(" ").at(0)),
-      countRatingUser: countRef.current,
     };
     onAddWatched(newWatchedMovie);
     onHandleClose();
@@ -459,7 +431,7 @@ const App = () => {
 
   useEffect(() => {
     const callback = (e) => {
-      // console.log(e);
+      console.log(e);
       if (e.code === "Escape") {
         handleClose();
         console.log("keydown event for ESC");
