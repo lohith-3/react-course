@@ -1,20 +1,22 @@
+import {} from "react";
+
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
+import { CitiesProvider } from "./context/CitiesContext";
+import { AuthProvider } from "./context/FakeAuthContext";
+
+import CityList from "./components/CityList";
+import CountryList from "./components/CountryList";
+import City from "./components/City";
+import Form from "./components/Form";
+
+import ProtectedRoute from "./pages/ProtectedRoute";
 import Product from "./pages/Product";
 import Pricing from "./pages/Pricing";
 import HomePage from "./pages/HomePage";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./pages/AppLayout";
 import Login from "./pages/Login";
-import CityList from "./components/CityList";
-import {} from "react";
-import CountryList from "./components/CountryList";
-import City from "./components/City";
-import Form from "./components/Form";
-
-import { CitiesProvider } from "./context/CitiesContext";
-import { AuthProvider } from "./context/FakeAuthContext";
-import ProtectedRoute from "./pages/ProtectedRoute";
 
 const App = () => {
   return (

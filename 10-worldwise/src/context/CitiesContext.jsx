@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useCallback } from "react";
 import { createContext, useEffect, useContext, useReducer } from "react";
 
 const BASE_URL = "http://localhost:9000";
@@ -79,20 +80,39 @@ function CitiesProvider({ children }) {
     fetchCities();
   }, []);
 
-  const getCityById = async (id) => {
-    try {
-      dispatch({ type: "loading" });
-      const response = await fetch(`${BASE_URL}/cities/${id}`);
-      const data = await response.json();
+  const getCityById = useCallback(
+    async function getCityById(id) {
+      if (Number(id) === currentCity.id) return;
+      try {
+        dispatch({ type: "loading" });
+        const response = await fetch(`${BASE_URL}/cities/${currentCity.id}`);
+        const data = await response.json();
 
-      dispatch({ type: "city/loaded", payload: data });
-    } catch (err) {
-      dispatch({
-        type: "rejected",
-        payload: `Error while fetching city by id: ${err.message}`,
-      });
-    }
-  };
+        dispatch({ type: "city/loaded", payload: data });
+      } catch (err) {
+        dispatch({
+          type: "rejected",
+          payload: `Error while fetching city by id: ${err.message}`,
+        });
+      }
+    },
+    [currentCity.id]
+  );
+
+  // const getCityById = async (id) => {
+  //   try {
+  //     dispatch({ type: "loading" });
+  //     const response = await fetch(`${BASE_URL}/cities/${id}`);
+  //     const data = await response.json();
+
+  //     dispatch({ type: "city/loaded", payload: data });
+  //   } catch (err) {
+  //     dispatch({
+  //       type: "rejected",
+  //       payload: `Error while fetching city by id: ${err.message}`,
+  //     });
+  //   }
+  // };
 
   const createCity = async (newCity) => {
     try {
